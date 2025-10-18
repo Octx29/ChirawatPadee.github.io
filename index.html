@@ -16,20 +16,82 @@
             --accent-gray: #333333;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             padding: 0;
             font-family: 'Kanit', 'Sarabun', sans-serif;
-            background-color: #e0e0e0;
+            /* ★★★ 1. ปรับปรุง: เปลี่ยนพื้นหลังเป็นสีเข้ม และปรับ padding ★★★ */
+            background-color: #111; /* เปลี่ยนจาก #e0e0e0 */
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem 0;
+            padding: 70px 1rem 30px 1rem; /* เปลี่ยนจาก 70px 0 30px 0 */
+            box-sizing: border-box; /* เพิ่ม */
         }
 
+        /* --- Nav-bar ด้านบน (คงเดิม) --- */
+        .side-nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            transform: none;
+            background-color: var(--dark-bg);
+            border-radius: 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            padding: 0;
+            border-bottom: 1px solid var(--accent-gray);
+        }
+        .side-nav ul {
+            list-style: none;
+            padding: 5px 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .side-nav li a {
+            position: relative; 
+            display: block;
+            padding: 15px 20px;
+            color: var(--gray-text);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 300;
+            border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+        }
+        .side-nav li a:hover {
+            background-color: transparent;
+            color: var(--kmitl-orange);
+            transform: none;
+        }
+        .side-nav li a::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--kmitl-orange);
+            transition: width 0.3s ease;
+        }
+        .side-nav li a:hover::after {
+            width: 70%;
+        }
+        /* ------------------------------------- */
+
         .portfolio-container {
-            width: 800px;
+            /* ★★★ 2. ปรับปรุง: ขยายความกว้างสูงสุดของเว็บ ★★★ */
+            width: 100%; /* เปลี่ยนจาก 90% */
+            max-width: 1440px; /* ขยายจาก 1280px เป็น 1440px */
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 0 auto; /* เพิ่มเพื่อให้แน่ใจว่าอยู่กลางเสมอ */
         }
 
         .page {
@@ -43,9 +105,9 @@
             display: flex;
             flex-direction: column;
             padding: 50px 60px;
+            scroll-margin-top: 70px; 
         }
 
-        /* --- Page-specific Backgrounds & Elements --- */
         .page-1 {
             background: linear-gradient(135deg, var(--kmitl-blue) 0%, var(--dark-bg) 60%);
             align-items: center;
@@ -90,7 +152,6 @@
             opacity: 0.5;
         }
 
-        /* --- General Typography & Layout --- */
         h1, h2, h3, h4 {
             margin: 0;
             font-weight: 700;
@@ -103,15 +164,6 @@
             font-family: 'Sarabun', sans-serif;
             position: relative;
             z-index: 2;
-        }
-        .main-header {
-            font-size: 3rem;
-            color: var(--light-text);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            border-bottom: 3px solid var(--kmitl-orange);
-            padding-bottom: 15px;
-            display: inline-block;
         }
         .page-title {
             font-size: 2.8rem;
@@ -128,7 +180,6 @@
             z-index: 10;
         }
 
-        /* --- Page 1: Cover Page --- */
         .page-1 .kmitl-logo { bottom: 40px; right: 40px; }
         .cover-photo-placeholder {
             width: 250px;
@@ -152,75 +203,183 @@
         }
         .submission-info p { margin: 5px 0; font-size: 1.1rem; line-height: 1.6; }
 
-        /* --- Page 2: Preface --- */
         .preface-content { margin-top: 20px; max-width: 90%; }
         .preface-content p { text-indent: 40px; font-size: 1.1rem; color: var(--gray-text); }
         .signature { margin-top: 60px; text-align: right; color: var(--light-text); }
         .signature p { font-size: 1.1rem; margin: 0; }
 
-        /* --- Page 3: Table of Contents --- */
         .toc-list { list-style: none; padding-left: 0; margin-top: 50px; }
-        .toc-list li { margin-bottom: 40px; font-size: 2.2rem; font-weight: 500; display: flex; align-items: baseline; transition: transform 0.2s ease; }
-        .toc-list li:hover { transform: translateX(10px); color: var(--light-text); }
+        .toc-list li { margin-bottom: 40px; font-size: 2.2rem; font-weight: 500; }
+        .toc-list a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: baseline;
+            transition: transform 0.2s ease;
+        }
+        .toc-list a:hover {
+            transform: translateX(10px);
+            color: var(--light-text);
+        }
         .toc-number { font-size: 2.5rem; color: var(--kmitl-orange); font-weight: 700; margin-right: 25px; min-width: 60px; }
         .toc-en { font-size: 1.2rem; color: var(--gray-text); margin-left: 15px; font-weight: 300; }
 
-        /* --- Page 4: Profile --- */
         .profile-grid { display: grid; grid-template-columns: 250px 1fr; gap: 40px; align-items: start; height: 100%; }
         .profile-left { display: flex; flex-direction: column; align-items: center; }
-        .profile-photo-placeholder { 
-            width: 200px; 
-            height: 200px; 
-            border-radius: 50%; 
-            background-color: var(--accent-gray); 
-            border: 4px solid var(--kmitl-orange); 
-            margin-bottom: 20px; 
-            object-fit: cover; 
+        .profile-photo-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: var(--accent-gray);
+            border: 4px solid var(--kmitl-orange);
+            margin-bottom: 20px;
+            object-fit: cover;
             box-sizing: border-box;
         }
         .profile-section { width: 100%; margin-bottom: 25px; }
-        .profile-section h3 { color: var(--kmitl-orange); font-size: 1.5rem; border-bottom: 2px solid var(--accent-gray); padding-bottom: 10px; margin-bottom: 15px; }
+        .profile-section h3 { 
+            color: var(--kmitl-orange); 
+            font-size: 1.5rem; 
+            border-bottom: 2px solid var(--accent-gray); 
+            padding-bottom: 10px; 
+            margin-bottom: 15px; 
+            display: flex;
+            align-items: center;
+        }
+        .profile-section h3::before {
+            content: '▶';
+            font-size: 0.8em;
+            color: var(--kmitl-orange);
+            margin-right: 10px;
+        }
         .profile-info p { margin: 8px 0; font-size: 1rem; color: var(--gray-text); }
         .profile-info strong { color: var(--light-text); min-width: 80px; display: inline-block; }
         .skills-container { display: flex; flex-wrap: wrap; gap: 15px; }
-        .skill-icon { width: 50px; height: 50px; background-color: var(--accent-gray); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 500; }
         
-        /* --- Page 5: Education --- */
+        /* ★★★ 3. ปรับปรุง: ทำให้กล่อง Skill ใหญ่ขึ้นและยืดหยุ่น ★★★ */
+        .skill-icon {
+            /* width: 50px; */ /* ลบ width คงที่ */
+            height: 45px; /* เปลี่ยน height */
+            padding: 0 25px; /* เพิ่ม padding ด้านข้าง */
+            background-color: var(--accent-gray);
+            border-radius: 8px;
+            display: inline-flex; /* เปลี่ยนเป็น inline-flex */
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem; /* เพิ่มขนาด font */
+            font-weight: 400; /* ปรับน้ำหนัก */
+            transition: all 0.2s ease; /* เพิ่ม transition */
+        }
+        .skill-icon:hover {
+            background-color: var(--kmitl-orange);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+        /* ------------------------------------- */
+
         .timeline { position: relative; max-width: 100%; margin-top: 30px; }
         .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--kmitl-orange); top: 0; bottom: 0; left: 0; }
         .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 100%; box-sizing: border-box; padding-left: 40px; margin-bottom: 40px; }
         .timeline-container::after { content: ''; position: absolute; width: 25px; height: 25px; left: -12px; background-color: var(--dark-bg); border: 4px solid var(--kmitl-orange); top: 15px; border-radius: 50%; z-index: 1; }
-        .timeline-content { padding: 20px 30px; background-color: var(--accent-gray); position: relative; border-radius: 6px; }
+        .timeline-content { 
+            padding: 20px 30px; 
+            background-color: var(--accent-gray); 
+            position: relative; 
+            border-radius: 6px; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
         .timeline-content h2 { font-size: 1.8rem; color: var(--kmitl-orange); }
         .timeline-content h3 { font-size: 1.2rem; color: var(--light-text); font-weight: 500; }
         .timeline-content p { margin: 5px 0 0 0; color: var(--gray-text); }
 
-        /* --- Page 6-7: Activities --- */
         .activities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; height: 100%; }
-        .activity-card { background-color: var(--accent-gray); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
-        .activity-image-placeholder { width: 100%; height: 180px; background-color: #444; display: flex; align-items: center; justify-content: center; color: var(--gray-text); }
+        .activity-card { 
+            background-color: var(--accent-gray); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .activity-image-placeholder { 
+            width: 100%; 
+            height: 180px; 
+            background-color: var(--accent-gray); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--kmitl-orange);
+            opacity: 0.7;
+            font-style: italic;
+            border-bottom: 2px dashed var(--kmitl-orange);
+        }
         .activity-description { padding: 20px; }
         .activity-description h3 { font-size: 1.2rem; color: var(--kmitl-orange); margin-bottom: 10px; }
         .activity-description p { font-size: 0.9rem; line-height: 1.6; margin: 5px 0; color: var(--gray-text); }
 
-        /* --- Page 8: Certificates --- */
         .certs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .cert-card { background-color: var(--accent-gray); padding: 15px; border-radius: 8px; text-align: center; }
-        .cert-image-placeholder { width: 100%; height: 200px; background-color: #444; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: var(--gray-text); border-radius: 4px; }
+        .cert-card { 
+            background-color: var(--accent-gray); 
+            padding: 15px; 
+            border-radius: 8px; 
+            text-align: center; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cert-image-placeholder { 
+            width: 100%; 
+            height: 200px; 
+            background-color: var(--accent-gray); 
+            margin-bottom: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--kmitl-orange);
+            opacity: 0.7;
+            font-style: italic;
+            border-radius: 4px; 
+            border: 2px dashed var(--kmitl-orange);
+        }
         .cert-card h3 { color: var(--kmitl-orange); font-size: 1.1rem; margin-bottom: 5px; }
         .cert-card p { font-size: 0.9rem; color: var(--gray-text); margin: 0; }
 
-        /* --- Page 9: Projects --- */
         .project-container { display: flex; flex-direction: column; gap: 30px; }
-        .project-card { display: grid; grid-template-columns: 250px 1fr; gap: 25px; background-color: var(--accent-gray); padding: 25px; border-radius: 8px; align-items: center; }
+        .project-card { 
+            display: grid; 
+            grid-template-columns: 250px 1fr; 
+            gap: 25px; 
+            background-color: var(--accent-gray); 
+            padding: 25px; 
+            border-radius: 8px; 
+            align-items: center; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
         .project-left { text-align: center; }
-        .project-image-placeholder { width: 100%; height: 150px; background-color: #444; border-radius: 6px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: var(--gray-text); }
+        .project-image-placeholder { 
+            width: 100%; 
+            height: 150px; 
+            background-color: var(--accent-gray); 
+            border-radius: 6px; 
+            margin-bottom: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--kmitl-orange);
+            opacity: 0.7;
+            font-style: italic;
+            border: 2px dashed var(--kmitl-orange);
+        }
         .project-qr-placeholder { width: 80px; height: 80px; background-color: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: black; font-size: 0.8rem; }
         .project-details h2 { color: var(--kmitl-orange); font-size: 1.6rem; margin-bottom: 10px; }
         .project-details p { font-size: 1rem; color: var(--gray-text); margin-bottom: 15px; }
         .tech-stack h3 { font-size: 1.1rem; color: var(--light-text); margin-bottom: 10px; }
 
-        /* --- Page 10: Back Cover --- */
+        /* Hover Effect (คงเดิม) */
+        .activity-card:hover, .cert-card:hover, .project-card:hover, .timeline-container:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+
         .back-cover-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
         .quote { font-size: 1.5rem; font-style: italic; color: var(--gray-text); max-width: 60%; margin-bottom: 40px; position: relative; padding: 0 20px; text-align: center; }
         .quote::before, .quote::after { content: '"'; font-size: 4rem; color: var(--kmitl-orange); position: absolute; opacity: 0.5; }
@@ -231,12 +390,41 @@
         .page-10 .kmitl-logo { position: absolute; bottom: 40px; left: 40px; width: 60px; }
 
 
-        /* ========== MOBILE RESPONSIVE STYLES ========== */
-        /* === โค้ดส่วนนี้จะทำงานเมื่อหน้าจอมีความกว้างไม่เกิน 768px === */
         @media (max-width: 768px) {
             body {
-                padding: 0; /* ไม่มีระยะห่างรอบนอกสุดบนมือถือ */
+                /* ★★★ 4. ปรับปรุง: Reset padding ของ body สำหรับ mobile ★★★ */
+                padding: 50px 0 0 0;
             }
+
+            .side-nav {
+                top: 0;
+                bottom: auto;
+                transform: none;
+                background-color: var(--dark-bg);
+                border-bottom: 1px solid var(--accent-gray);
+                border-top: none;
+                padding: 0;
+            }
+            .side-nav ul {
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                padding: 5px 0;
+            }
+            .side-nav li a {
+                padding: 8px 5px;
+                font-size: 0.8rem;
+                font-weight: 300;
+            }
+            .side-nav li a::after {
+                display: none;
+            }
+            .side-nav li a:hover {
+                background-color: transparent;
+                color: var(--kmitl-orange);
+                transform: none;
+            }
+            /* ------------------------------------- */
 
             .portfolio-container {
                 width: 100%;
@@ -244,10 +432,11 @@
             }
 
             .page {
-                height: auto; /* ความสูงปรับตามเนื้อหา */
-                min-height: 100vh; /* สูงอย่างน้อยเต็มหน้าจอมือถือ */
-                padding: 40px 25px; /* ลดระยะห่างด้านข้าง */
-                border-bottom: 2px solid #444; /* เส้นคั่นระหว่างหน้า */
+                height: auto;
+                min-height: 100vh;
+                padding: 40px 25px 25px 25px;
+                border-bottom: 2px solid #444;
+                scroll-margin-top: 50px;
             }
 
             .page-title {
@@ -255,48 +444,58 @@
                 margin-bottom: 30px;
             }
 
-            /* --- Page 1 Responsive --- */
             .cover-photo-placeholder { width: 180px; height: 180px; }
             .cover-title h1 { font-size: 2.8rem; }
             .cover-title h2 { font-size: 1.4rem; }
             .cover-name h3 { font-size: 2rem; }
             .cover-name h4 { font-size: 1.2rem; }
             .submission-info p { font-size: 1rem; }
-            .geometric-shape { display: none; } /* ซ่อนกราฟิกตกแต่งที่ไม่จำเป็น */
+            .geometric-shape { display: none; }
 
-            /* --- Page 2 Responsive --- */
             .preface-content { max-width: 100%; }
             .preface-content p { font-size: 1rem; }
 
-            /* --- Page 3 Responsive --- */
             .toc-list li { font-size: 1.5rem; margin-bottom: 30px;}
             .toc-number { font-size: 1.8rem; margin-right: 15px; }
             .toc-en { font-size: 1rem; }
 
-            /* --- Page 4 Responsive --- */
-            .profile-grid { grid-template-columns: 1fr; } /* เปลี่ยนเป็น 1 คอลัมน์ */
+            .profile-grid { grid-template-columns: 1fr; }
             .profile-left { align-items: center; }
+            
+            /* ★★★ 5. ปรับปรุง: ทำให้กล่อง Skill ในมือถือยืดหยุ่นด้วย ★★★ */
+            .skill-icon {
+                height: 40px;
+                padding: 0 20px;
+                font-size: 0.9rem;
+            }
 
-            /* --- Page 6, 7, 8 Responsive --- */
-            .activities-grid, .certs-grid { grid-template-columns: 1fr; } /* เปลี่ยนเป็น 1 คอลัมน์ */
+            .activities-grid, .certs-grid { grid-template-columns: 1fr; }
             .cert-image-placeholder { height: 180px; }
 
-            /* --- Page 9 Responsive --- */
-            .project-card { grid-template-columns: 1fr; } /* เปลี่ยนเป็น 1 คอลัมน์ */
+            .project-card { grid-template-columns: 1fr; }
             .project-left { margin-bottom: 15px; }
 
-            /* --- Page 10 Responsive --- */
             .thank-you { font-size: 3rem; }
             .quote { font-size: 1.2rem; max-width: 90%; }
         }
-
     </style>
 </head>
 <body>
 
+    <nav class="side-nav">
+        <ul>
+            <li><a href="#home">หน้าแรก</a></li>
+            <li><a href="#profile">ประวัติ</a></li>
+            <li><a href="#education">การศึกษา</a></li>
+            <li><a href="#activities">กิจกรรม</a></li>
+            <li><a href="#certificates">เกียรติบัตร</a></li>
+            <li><a href="#projects">ผลงาน</a></li>
+        </ul>
+    </nav>
+    
     <div class="portfolio-container">
 
-        <div class="page page-1">
+        <div class="page page-1" id="home">
             <div class="circuit-bg"></div>
             <img src="image_44e6ed.jpg" alt="KMITL Logo" class="kmitl-logo">
             <div class="cover-title">
@@ -316,14 +515,14 @@
             </div>
         </div>
 
-        <div class="page page-2">
+        <div class="page page-2" id="preface">
             <div class="circuit-bg"></div>
             <div class="geometric-shape shape-2"></div>
             <h1 class="page-title">PREFACE<br>คำนำ</h1>
             <div class="preface-content">
                 <p>กระผม นายจีรวัฒณ์ ปาดี มีความสนใจและความหลงใหลในโลกของเทคโนโลยีและการเขียนโปรแกรมมาโดยตลอด การได้สร้างสรรค์สิ่งต่างๆ จากตรรกะและโค้ด ทำให้กระผมค้นพบว่า "วิศวกรรมซอฟต์แวร์" คือเส้นทางที่ใช่สำหรับตนเอง ความฝันสูงสุดของกระผมคือการได้เป็นส่วนหนึ่งในการพัฒนาซอฟต์แวร์และนวัตกรรมที่สามารถสร้างประโยชน์และเปลี่ยนแปลงสังคมให้ดีขึ้น</p>
                 <p>แฟ้มสะสมผลงานฉบับนี้จัดทำขึ้นเพื่อนำเสนอประวัติส่วนตัว ประวัติการศึกษา ผลงาน และประสบการณ์ต่างๆ ที่กระผมได้สั่งสมมาตลอดช่วงมัธยมศึกษาตอนปลาย ซึ่งสะท้อนให้เห็นถึงความมุ่งมั่น ความพยายาม และศักยภาพในการเรียนรู้เพื่อเตรียมความพร้อมสู่การเป็นนักศึกษาวิศวกรรมซอฟต์แวร์ที่มีคุณภาพ</p>
-                <p>กระผมมีความเชื่อมั่นว่า คณะวิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมซอฟต์แวร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง เป็นสถาบันการศึกษาชั้นนำที่จะช่วยเติมเต็มความฝันและมอบองค์ความรู้ที่จำเป็นในการก้าวสู่การเป็นวิศวกรซอฟต์แวร์มืออาชีพได้ กระผมจึงหวังเป็นอย่างยิ่งว่าจะได้รับโอกาสในการเข้าศึกษาต่อ และพร้อมที่จะทุ่มเทอย่างสุดความสามารถเพื่อพัฒนาตนเองและสร้างชื่อเสียงให้แก่สถาบันฯ ต่อไป</p>
+                <p>กระผมมีความเชื่อมั่นว่า คณะวิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมซอฟต์แwร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง เป็นสถาบันการศึกษาชั้นนำที่จะช่วยเติมเต็มความฝันและมอบองค์ความรู้ที่จำเป็นในการก้าวสู่การเป็นวิศวกรซอฟต์แวร์มืออาชีพได้ กระผมจึงหวังเป็นอย่างยิ่งว่าจะได้รับโอกาสในการเข้าศึกษาต่อ และพร้อมที่จะทุ่มเทอย่างสุดความสามารถเพื่อพัฒนาตนเองและสร้างชื่อเสียงให้แก่สถาบันฯ ต่อไป</p>
                 <div class="signature">
                     <p>ด้วยความเคารพอย่างสูง</p><br><br>
                     <p>(นายจีรวัฒณ์ ปาดี)</p>
@@ -332,153 +531,155 @@
             </div>
         </div>
         
-        <div class="page page-3">
+        <div class="page page-3" id="toc">
              <div class="circuit-bg"></div>
              <div class="geometric-shape shape-1"></div>
              <h1 class="page-title">TABLE OF CONTENTS<br>สารบัญ</h1>
              <ul class="toc-list">
-                 <li><span class="toc-number">01</span> PROFILE <span class="toc-en">- ประวัติส่วนตัว</span></li>
-                 <li><span class="toc-number">02</span> EDUCATION <span class="toc-en">- ประวัติการศึกษา</span></li>
-                 <li><span class="toc-number">03</span> ACTIVITIES <span class="toc-en">- กิจกรรมที่เข้าร่วม</span></li>
-                 <li><span class="toc-number">04</span> CERTIFICATES <span class="toc-en">- เกียรติบัตรและรางวัล</span></li>
-                 <li><span class="toc-number">05</span> PROJECTS <span class="toc-en">- ผลงานและโครงงาน</span></li>
+                  <li><a href="#profile"><span class="toc-number">01</span> PROFILE <span class="toc-en">- ประวัติส่วนตัว</span></a></li>
+                  <li><a href="#education"><span class="toc-number">02</span> EDUCATION <span class="toc-en">- ประวัติการศึกษา</span></a></li>
+                  <li><a href="#activities"><span class="toc-number">03</span> ACTIVITIES <span class="toc-en">- กิจกรรมที่เข้าร่วม</span></a></li>
+                  <li><a href="#certificates"><span class="toc-number">04</span> CERTIFICATES <span class="toc-en">- เกียรติบัตรและรางวัล</span></a></li>
+                  <li><a href="#projects"><span class="toc-number">05</span> PROJECTS <span class="toc-en">- ผลงานและโครงงาน</span></a></li>
              </ul>
         </div>
         
-        <div class="page page-4">
+        <div class="page page-4" id="profile">
              <h1 class="page-title">PROFILE<br>ประวัติส่วนตัว</h1>
              <div class="profile-grid">
-                 <div class="profile-left">
-                     <img src="IMG_20251019_002124.jpg" alt="Profile Photo" class="profile-photo-placeholder">
-                     <div class="profile-section">
-                         <h3>CONTACT</h3>
-                         <div class="profile-info">
-                             <p><strong>ที่อยู่:</strong> 9 หมู่ 8 ต.แหลมกลัด อ.เมือง จ.ตราด</p>
-                             <p><strong>โทรศัพท์:</strong> 0886205987</p>
-                             <p><strong>อีเมล:</strong> Chirawatp4@gmail.com</p>
-                         </div>
-                     </div>
-                     <div class="profile-section">
-                         <h3>HOBBIES</h3>
-                         <div class="profile-info">
-                             <p>[ เขียนโค้ด ]</p>
-                             <p>[ เล่นเกม ]</p>
-                             <p>[ อ่านหนังสือเทคโนโลยี ]</p>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="profile-right">
-                    <div class="profile-section">
-                         <h3>PERSONAL INFO</h3>
-                         <div class="profile-info">
-                             <p><strong>ชื่อ-สกุล:</strong> นายจีรวัฒณ์ ปาดี</p>
-                             <p><strong>ชื่อเล่น:</strong> เก่ง</p>
-                             <p><strong>วันเกิด:</strong> 29 ตุลาคม พ.ศ. 2552</p>
-                             <p><strong>อายุ:</strong> 16 ปี</p>
-                             <p><strong>เชื้อชาติ:</strong> ไทย</p>
-                             <p><strong>สัญชาติ:</strong> ไทย</p>
-                             <p><strong>ศาสนา:</strong> พุทธ</p>
-                         </div>
-                     </div>
-                     <div class="profile-section">
-                         <h3>SKILLS</h3>
-                         <h4>Programming Languages</h4>
-                         <div class="skills-container"><div class="skill-icon">Python</div><div class="skill-icon">C++</div><div class="skill-icon">Java</div><div class="skill-icon">HTML</div><div class="skill-icon">CSS</div></div><br>
-                         <h4>Software & Tools</h4>
-                         <div class="skills-container"><div class="skill-icon">VS Code</div><div class="skill-icon">Git</div><div class="skill-icon">GitHub</div><div class="skill-icon">Figma</div></div><br>
-                         <h4>Language</h4>
-                         <div class="profile-info">
-                             <p><strong>Thai:</strong> Native</p>
-                             <p><strong>English:</strong> Intermediate</p>
-                         </div>
-                     </div>
-                 </div>
+                  <div class="profile-left">
+                       <img src="IMG_20251019_002124.jpg" alt="Profile Photo" class="profile-photo-placeholder">
+                       <div class="profile-section">
+                            <h3>CONTACT</h3>
+                            <div class="profile-info">
+                                 <p><strong>ที่อยู่:</strong> 9 หมู่ 8 ต.แหลมกลัด อ.เมือง จ.ตราด</p>
+                                 <p><strong>โทรศัพท์:</strong> 0886205987</p>
+                                 <p><strong>อีเมล:</strong> Chirawatp4@gmail.com</p>
+                            </div>
+                       </div>
+                       <div class="profile-section">
+                            <h3>HOBBIES</h3>
+                            <div class="profile-info">
+                                 <p>[ เขียนโค้ด ]</p>
+                                 <p>[ เล่นเกม ]</p>
+                                 <p>[ อ่านหนังสือเทคโนโลยี ]</p>
+                            </div>
+                       </div>
+                  </div>
+                  <div class="profile-right">
+                       <div class="profile-section">
+                            <h3>PERSONAL INFO</h3>
+                            <div class="profile-info">
+                                 <p><strong>ชื่อ-สกุล:</strong> นายจีรวัฒณ์ ปาดี</p>
+                                 <p><strong>ชื่อเล่น:</strong> เก่ง</p>
+                                 <p><strong>วันเกิด:</strong> 29 ตุลาคม พ.ศ. 2552</p>
+                                 <p><strong>อายุ:</strong> 16 ปี</p>
+                                 <p><strong>เชื้อชาติ:</strong> ไทย</p>
+                                 <p><strong>สัญชาติ:</strong> ไทย</p>
+                                 <p><strong>ศาสนา:</strong> พุทธ</p>
+                            </div>
+                       </div>
+                       <div class="profile-section">
+                            <h3>SKILLS</h3>
+                            <h4>Programming Languages</h4>
+                            <div class="skills-container"><div class="skill-icon">Python</div><div class="skill-icon">C++</div><div class="skill-icon">Java</div><div class="skill-icon">HTML</div><div class="skill-icon">CSS</div></div><br>
+                            <h4>Software & Tools</h4>
+                            <div class="skills-container"><div class="skill-icon">VS Code</div><div class="skill-icon">Git</div><div class="skill-icon">GitHub</div><div class="skill-icon">Figma</div></div><br>
+                            <h4>Language</h4>
+                            <div class="profile-info">
+                                 <p><strong>Thai:</strong> Native</p>
+                                 <p><strong>English:</strong> Intermediate</p>
+                            </div>
+                       </div>
+                  </div>
              </div>
         </div>
         
-        <div class="page page-5">
+        <div class="page page-5" id="education">
              <h1 class="page-title">EDUCATION<br>ประวัติการศึกษา</h1>
              <div class="timeline">
-                 <div class="timeline-container">
-                     <div class="timeline-content">
-                         <h2>ระดับมัธยมศึกษาตอนปลาย</h2>
-                         <h3>โรงเรียนสตรีประเสริฐศิลป์</h3>
-                         <p><strong>แผนการเรียน:</strong> [ แผนการเรียนวิทย์-คณิต ]</p>
-                         <p><strong>ปีการศึกษา:</strong> พ.ศ. 2571</p>
-                         <p><strong>เกรดเฉลี่ยสะสม (GPAX):</strong> [ GPAX ]</p>
-                     </div>
-                 </div>
-                 <div class="timeline-container">
-                     <div class="timeline-content">
-                         <h2>ระดับมัธยมศึกษาตอนต้น</h2>
-                         <h3>โรงเรียนสตรีประเสริฐศิลป์</h3>
-                         <p><strong>ปีการศึกษา:</strong> พ.ศ. 2567</p>
-                         <p><strong>เกรดเฉลี่ยสะสม (GPAX):</strong> 3.79</p>
-                     </div>
-                 </div>
+                  <div class="timeline-container">
+                       <div class="timeline-content">
+                            <h2>ระดับมัธยมศึกษาตอนปลาย</h2>
+                            <h3>โรงเรียนสตรีประเสริฐศิลป์</h3>
+                            <p><strong>แผนการเรียน:</strong> [ แผนการเรียนวิทย์-คณิต ]</p>
+                            <p><strong>ปีการศึกษา:</strong> พ.ศ. 2571</p>
+                            <p><strong>เกรดเฉลี่ยสะสม (GPAX):</strong> [ GPAX ]</p>
+                       </div>
+                  </div>
+                  <div class="timeline-container">
+                       <div class="timeline-content">
+                            <h2>ระดับมัธยมศึกษาตอนต้น</h2>
+                            <h3>โรงเรียนสตรีประเสริฐศิลป์</h3>
+                            <p><strong>ปีการศึกษา:</strong> พ.ศ. 2567</p>
+                            <p><strong>เกรดเฉลี่ยสะสม (GPAX):</strong> 3.79</p>
+                       </div>
+                  </div>
              </div>
         </div>
 
-        <div class="page page-6">
+        <div class="page page-6" id="activities">
             <h1 class="page-title">ACTIVITIES<br>กิจกรรมที่เข้าร่วม</h1>
             <div class="activities-grid">
-                <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 1 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบายสิ่งที่ได้เรียนรู้/ประสบการณ์ที่ได้รับ เช่น ได้เรียนรู้การทำงานเป็นทีม การแก้ปัญหาเฉพาะหน้า และพื้นฐานการเขียนโปรแกรมภาษา Python ]</p></div></div>
-                <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 2 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
-                <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 3 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
+                 <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม 1 ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 1 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบายสิ่งที่ได้เรียนรู้/ประสบการณ์ที่ได้รับ เช่น ได้เรียนรู้การทำงานเป็นทีม การแก้ปัญหาเฉพาะหน้า และพื้นฐานการเขียนโปรแกรมภาษา Python ]</p></div></div>
+                 <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม 2 ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 2 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
+                 <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม 3 ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 3 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
             </div>
         </div>
         
         <div class="page page-7">
             <h1 class="page-title">ACTIVITIES<br>กิจกรรมที่เข้าร่วม</h1>
             <div class="activities-grid">
-                <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 4 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
-                <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 5 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
-                <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 6 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
+                 <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม 4 ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 4 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
+                 <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม 5 ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 5 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
+                 <div class="activity-card"><div class="activity-image-placeholder">[ รูปภาพกิจกรรม 6 ]</div><div class="activity-description"><h3>[ ชื่อกิจกรรม 6 ]</h3><p><strong>วันที่/สถานที่:</strong> [ ระบุ ]</p><p><strong>บทบาท/สิ่งที่ได้รับ:</strong> [ อธิบาย ]</p></div></div>
             </div>
         </div>
         
-        <div class="page page-8">
+        <div class="page page-8" id="certificates">
             <h1 class="page-title">CERTIFICATES<br>เกียรติบัตรและรางวัล</h1>
             <div class="certs-grid">
-                <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 1 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
-                <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 2 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
-                <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 3 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
-                <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 4 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
+                 <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร 1 ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 1 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
+                 <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร 2 ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 2 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
+                 <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร 3 ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 3 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
+                 <div class="cert-card"><div class="cert-image-placeholder">[ รูปเกียรติบัตร 4 ]</div><h3>[ ชื่อรางวัล/เกียรติบัตร 4 ]</h3><p><strong>มอบให้โดย:</strong> [ ชื่อหน่วยงาน ]</p><p><strong>วันที่ได้รับ:</strong> [ วันที่ ]</p></div>
             </div>
         </div>
 
-        <div class="page page-9">
+        <div class="page page-9" id="projects">
             <h1 class="page-title">PROJECTS & WORKS<br>ผลงานและโครงงาน</h1>
             <div class="project-container">
-                <div class="project-card">
-                    <div class="project-left"><div class="project-image-placeholder">[ Screenshot ผลงาน ]</div><div class="project-qr-placeholder">[ QR Code ]</div></div>
-                    <div class="project-details">
-                        <h2>[ ชื่อโปรเจกต์ 1 ]</h2>
-                        <p>[ อธิบายรายละเอียดโปรเจกต์ ว่าคืออะไร ทำอะไรได้บ้าง แนวคิด และขั้นตอนการทำงานโดยย่อ ]</p>
-                        <div class="tech-stack"><h3>Technology Used:</h3><div class="skills-container"><div class="skill-icon">Python</div><div class="skill-icon">Tkinter</div><div class="skill-icon">SQLite</div></div></div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-left"><div class="project-image-placeholder">[ Screenshot ผลงาน ]</div><div class="project-qr-placeholder">[ QR Code ]</div></div>
-                    <div class="project-details">
-                        <h2>[ ชื่อโปรเจกต์ 2 ]</h2>
-                        <p>[ อธิบายรายละเอียดโปรเจกต์ ว่าคืออะไร ทำอะไรได้บ้าง แนวคิด และขั้นตอนการทำงานโดยย่อ ]</p>
-                        <div class="tech-stack"><h3>Technology Used:</h3><div class="skills-container"><div class="skill-icon">HTML</div><div class="skill-icon">CSS</div><div class="skill-icon">JS</div><div class="skill-icon">GitHub</div></div></div>
-                    </div>
-                </div>
+                 <div class="project-card">
+                      <div class="project-left"><div class="project-image-placeholder">[ Screenshot ผลงาน 1 ]</div><div class="project-qr-placeholder">[ QR Code ]</div></div>
+                      <div class="project-details">
+                           <h2>[ ชื่อโปรเจกต์ 1 ]</h2>
+                           <p>[ อธิบายรายละเอียดโปรเจกต์ ว่าคืออะไร ทำอะไรได้บ้าง แนวคิด และขั้นตอนการทำงานโดยย่อ ]</p>
+                           <div class="tech-stack"><h3>Technology Used:</h3><div class="skills-container"><div class="skill-icon">Python</div><div class="skill-icon">Tkinter</div><div class="skill-icon">SQLite</div></div></div>
+                      </div>
+                 </div>
+                 <div class="project-card">
+                      <div class="project-left"><div class="project-image-placeholder">[ Screenshot ผลงาน 2 ]</div><div class="project-qr-placeholder">[ QR Code ]</div></div>
+                      <div class="project-details">
+                           <h2>[ ชื่อโปรเจกต์ 2 ]</h2>
+                           <p>[ อธิบายรายละเอียดโปรเจกต์ ว่าคืออะไร ทำอะไรได้บ้าง แนวคิด และขั้นตอนการทำงานโดยย่อ ]</p>
+                           <div class="tech-stack"><h3>Technology Used:</h3><div class="skills-container"><div class="skill-icon">HTML</div><div class="skill-icon">CSS</div><div class="skill-icon">JS</div><div class="skill-icon">GitHub</div></div></div>
+                      </div>
+                 </div>
             </div>
         </div>
 
         <div class="page page-10">
             <div class="circuit-bg"></div>
-            <img src="image_44e6ed.jpg" alt="KMITL Logo" class="kmitl-logo">
+            <a href="#home">
+                <img src="image_44e6ed.jpg" alt="KMITL Logo" class="kmitl-logo">
+            </a>
             <div class="back-cover-content">
-                <p class="quote">The best way to predict the future is to invent it.<br>- Alan Kay</p>
-                <h1 class="thank-you">THANK YOU</h1>
-                <div class="back-contact">
-                    <p><strong>Email:</strong> Chirawatp4@gmail.com</p>
-                    <p><strong>Phone:</strong> 0886205987</p>
-                </div>
+                 <p class="quote">The best way to predict the future is to invent it.<br>- Alan Kay</p>
+                 <h1 class="thank-you">THANK YOU</h1>
+                 <div class="back-contact">
+                      <p><strong>Email:</strong> Chirawatp4@gmail.com</p>
+                      <p><strong>Phone:</strong> 0886205987</p>
+                 </div>
             </div>
         </div>
 
