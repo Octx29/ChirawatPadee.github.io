@@ -24,16 +24,15 @@
             margin: 0;
             padding: 0;
             font-family: 'Kanit', 'Sarabun', sans-serif;
-            /* ★★★ 1. ปรับปรุง: เปลี่ยนพื้นหลังเป็นสีเข้ม และปรับ padding ★★★ */
-            background-color: #111; /* เปลี่ยนจาก #e0e0e0 */
+            background-color: #111;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 70px 1rem 30px 1rem; /* เปลี่ยนจาก 70px 0 30px 0 */
-            box-sizing: border-box; /* เพิ่ม */
+            padding: 70px 1rem 30px 1rem;
+            box-sizing: border-box; 
         }
 
-        /* --- Nav-bar ด้านบน (คงเดิม) --- */
+        /* --- Nav-bar ด้านบน --- */
         .side-nav {
             position: fixed;
             left: 0;
@@ -87,11 +86,10 @@
         /* ------------------------------------- */
 
         .portfolio-container {
-            /* ★★★ 2. ปรับปรุง: ขยายความกว้างสูงสุดของเว็บ ★★★ */
-            width: 100%; /* เปลี่ยนจาก 90% */
-            max-width: 1440px; /* ขยายจาก 1280px เป็น 1440px */
+            width: 100%; 
+            max-width: 1440px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin: 0 auto; /* เพิ่มเพื่อให้แน่ใจว่าอยู่กลางเสมอ */
+            margin: 0 auto; 
         }
 
         .page {
@@ -256,26 +254,23 @@
         .profile-info strong { color: var(--light-text); min-width: 80px; display: inline-block; }
         .skills-container { display: flex; flex-wrap: wrap; gap: 15px; }
         
-        /* ★★★ 3. ปรับปรุง: ทำให้กล่อง Skill ใหญ่ขึ้นและยืดหยุ่น ★★★ */
         .skill-icon {
-            /* width: 50px; */ /* ลบ width คงที่ */
-            height: 45px; /* เปลี่ยน height */
-            padding: 0 25px; /* เพิ่ม padding ด้านข้าง */
+            height: 45px;
+            padding: 0 25px;
             background-color: var(--accent-gray);
             border-radius: 8px;
-            display: inline-flex; /* เปลี่ยนเป็น inline-flex */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem; /* เพิ่มขนาด font */
-            font-weight: 400; /* ปรับน้ำหนัก */
-            transition: all 0.2s ease; /* เพิ่ม transition */
+            font-size: 1rem; 
+            font-weight: 400; 
+            transition: all 0.2s ease; 
         }
         .skill-icon:hover {
             background-color: var(--kmitl-orange);
             color: var(--dark-bg);
             transform: translateY(-2px);
         }
-        /* ------------------------------------- */
 
         .timeline { position: relative; max-width: 100%; margin-top: 30px; }
         .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--kmitl-orange); top: 0; bottom: 0; left: 0; }
@@ -373,12 +368,10 @@
         .project-details p { font-size: 1rem; color: var(--gray-text); margin-bottom: 15px; }
         .tech-stack h3 { font-size: 1.1rem; color: var(--light-text); margin-bottom: 10px; }
 
-        /* Hover Effect (คงเดิม) */
         .activity-card:hover, .cert-card:hover, .project-card:hover, .timeline-container:hover .timeline-content {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
-
 
         .back-cover-content { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
         .quote { font-size: 1.5rem; font-style: italic; color: var(--gray-text); max-width: 60%; margin-bottom: 40px; position: relative; padding: 0 20px; text-align: center; }
@@ -392,7 +385,6 @@
 
         @media (max-width: 768px) {
             body {
-                /* ★★★ 4. ปรับปรุง: Reset padding ของ body สำหรับ mobile ★★★ */
                 padding: 50px 0 0 0;
             }
 
@@ -449,7 +441,23 @@
             .cover-title h2 { font-size: 1.4rem; }
             .cover-name h3 { font-size: 2rem; }
             .cover-name h4 { font-size: 1.2rem; }
-            .submission-info p { font-size: 1rem; }
+            
+            /* ★★★ 1. ปรับปรุง: แก้ไขการทับซ้อนของโลโก้ในจอมือถือ ★★★ */
+            .submission-info {
+                text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+            }
+            .submission-info p { 
+                font-size: 1rem; 
+            }
+            .page-1 .kmitl-logo {
+                position: relative; /* ปิดการลอย */
+                bottom: auto;       /* รีเซ็ตค่า */
+                right: auto;      /* รีเซ็ตค่า */
+                margin-top: 30px;   /* เว้นระยะห่างจากกล่องข้อความ */
+                width: 70px;        /* ปรับขนาดให้เล็กลงเล็กน้อย */
+            }
+            /* ------------------------------------- */
+
             .geometric-shape { display: none; }
 
             .preface-content { max-width: 100%; }
@@ -462,7 +470,6 @@
             .profile-grid { grid-template-columns: 1fr; }
             .profile-left { align-items: center; }
             
-            /* ★★★ 5. ปรับปรุง: ทำให้กล่อง Skill ในมือถือยืดหยุ่นด้วย ★★★ */
             .skill-icon {
                 height: 40px;
                 padding: 0 20px;
@@ -497,7 +504,6 @@
 
         <div class="page page-1" id="home">
             <div class="circuit-bg"></div>
-            <img src="image_44e6ed.jpg" alt="KMITL Logo" class="kmitl-logo">
             <div class="cover-title">
                 <h1>PORTFOLIO</h1>
                 <h2>แฟ้มสะสมผลงาน</h2>
@@ -513,8 +519,8 @@
                 <p><strong>คณะวิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมซอฟต์แวร์</strong></p>
                 <p>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
             </div>
+            <img src="image_44e6ed.jpg" alt="KMITL Logo" class="kmitl-logo"> 
         </div>
-
         <div class="page page-2" id="preface">
             <div class="circuit-bg"></div>
             <div class="geometric-shape shape-2"></div>
